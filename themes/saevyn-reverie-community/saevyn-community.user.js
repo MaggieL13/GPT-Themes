@@ -2361,16 +2361,18 @@
             }
 
             body.saevyn-active #sidebar-header a[data-sidebar-item="true"][href="/"] .header-wordmark::before {
-                content: "";
-                display: block;
+                content: "✦";
+                display: grid;
+                place-items: center;
                 width: 28px;
                 height: 28px;
                 flex: 0 0 28px;
                 max-width: none;
-                background: center / contain no-repeat none;
-                filter:
-                    drop-shadow(0 0 3px rgba(199, 155, 79, 0.28))
-                    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.38));
+                color: var(--saevyn-gold-light);
+                font: 400 24px/1 Georgia, serif;
+                text-shadow:
+                    0 0 6px color-mix(in srgb, var(--saevyn-gold) 42%, transparent),
+                    0 2px 5px rgba(0, 0, 0, 0.38);
                 pointer-events: none;
             }
 
@@ -2379,15 +2381,18 @@
             }
 
             body.saevyn-active #stage-sidebar-tiny-bar button:has(use[href*="#blossom"])::before {
-                content: "";
+                content: "✦";
                 position: absolute;
                 z-index: 1;
+                display: grid;
+                place-items: center;
                 width: 27px;
                 height: 27px;
-                background: center / contain no-repeat none;
-                filter:
-                    drop-shadow(0 0 3px rgba(199, 155, 79, 0.28))
-                    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.38));
+                color: var(--saevyn-gold-light);
+                font: 400 23px/1 Georgia, serif;
+                text-shadow:
+                    0 0 6px color-mix(in srgb, var(--saevyn-gold) 42%, transparent),
+                    0 2px 5px rgba(0, 0, 0, 0.38);
                 opacity: 1;
                 transition: opacity 140ms ease;
                 pointer-events: none;
@@ -2416,14 +2421,16 @@
                 }
 
                 body.saevyn-active #sidebar-header a[data-sidebar-item="true"][href="/"]::before {
-                    content: "";
-                    display: block;
+                    content: "✦";
+                    display: grid;
+                    place-items: center;
                     width: 27px;
                     height: 27px;
-                    background: center / contain no-repeat none;
-                    filter:
-                        drop-shadow(0 0 3px rgba(199, 155, 79, 0.28))
-                        drop-shadow(0 2px 5px rgba(0, 0, 0, 0.38));
+                    color: var(--saevyn-gold-light);
+                    font: 400 23px/1 Georgia, serif;
+                    text-shadow:
+                        0 0 6px color-mix(in srgb, var(--saevyn-gold) 42%, transparent),
+                        0 2px 5px rgba(0, 0, 0, 0.38);
                     pointer-events: none;
                 }
 
