@@ -2,7 +2,7 @@
 
 Saevyn Reverie Community is the shareable, editable build of the Reverie ChatGPT skin: the same themes, appearance controls, reactions, responsive layouts, and current ChatGPT compatibility fixes, with an image-free public speaker ornament.
 
-The Community build is generated directly from Reverie 1.5.10 so the two editions no longer maintain separate theme implementations. It removes household names, portraits, divider artwork, and brand/favicon images while retaining every Reverie palette and look. Community speakers use the configured emoji or text sigil as a portrait anchor, a CSS hairline extending to the right, and a faint vertical thread beside the message body.
+The Community build is generated directly from Reverie 1.5.10 so the two editions no longer maintain separate theme implementations. It removes household names, portraits, divider artwork, and private brand/favicon artwork while retaining every Reverie palette and look. Community speakers use the configured emoji or text sigil as a portrait anchor, a CSS hairline extending to the right, and a faint vertical thread beside the message body. A tiny inline `✦` glyph replaces the private browser favicon.
 
 ## Install
 

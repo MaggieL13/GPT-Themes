@@ -8,7 +8,8 @@ The distributed v1.5.10 script:
 - contains no telemetry, analytics, cookies, or remote service integration;
 - does not call `fetch`, `XMLHttpRequest`, `WebSocket`, or `sendBeacon`;
 - does not save or transmit conversation text;
-- contains no personal names, household portraits, divider images, or brand/favicon images;
+- contains no personal names, household portraits, divider images, or private brand/favicon artwork;
+- generates its `✦` browser favicon locally from a tiny inline text-only SVG;
 - renders speaker ornaments using CSS hairlines and the configured text sigil only.
 
 The appearance panel stores one local browser preference record named `saevyn-community-settings-v1`. It contains only the selected colors, font preset names, speaker-separation switch, active speaker roster, display names, and configured speaker-detection symbols. It contains no account identifiers or conversation text. Resetting the userscript manager/site storage removes it.

@@ -3,6 +3,7 @@
 ## 1.5.10 — Community rebased on Reverie
 
 - Replaced the removed private GPT brand artwork with a text-only `✦` in the full, collapsed, and mobile sidebar headers.
+- Replaced the browser favicon with the same locally generated `✦` glyph.
 - Made the current Reverie 1.5.10 userscript the canonical source for Community.
 - Inherited Reverie's complete theme looks, appearance controls, reaction styling, opaque menus, and responsive geometry.
 - Replaced household identities with neutral editable speaker slots; fresh installs begin with two and the appearance panel can add or remove slots as needed.

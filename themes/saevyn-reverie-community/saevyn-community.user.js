@@ -4352,10 +4352,72 @@
     }
 
 
-    // Community leaves ChatGPT's favicon untouched and creates no image canvases.
-    function syncFavicon() {}
-    function restoreFavicon() {}
-    function mutationsTouchFavicon() { return false; }
+    // Community uses a tiny text-glyph SVG favicon: no private brand artwork,
+    // raster asset, canvas, network request, or external file is involved.
+    const COMMUNITY_FAVICON = "data:image/svg+xml," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><text x="32" y="48" text-anchor="middle" font-family="Georgia,serif" font-size="52" fill="#efd58c">✦</text></svg>'
+    );
+
+    function storeNativeFavicon(favicon) {
+        if (favicon.dataset.saevynFaviconStored === "true") return;
+        favicon.dataset.saevynFaviconStored = "true";
+        favicon.dataset.saevynOriginalFaviconHref = favicon.getAttribute("href") || "";
+        favicon.dataset.saevynOriginalFaviconType = favicon.getAttribute("type") || "";
+        favicon.dataset.saevynOriginalFaviconSizes = favicon.getAttribute("sizes") || "";
+    }
+
+    function restoreNativeFaviconAttribute(favicon, name, storedName) {
+        const value = favicon.dataset[storedName] || "";
+        if (value) favicon.setAttribute(name, value);
+        else favicon.removeAttribute(name);
+        delete favicon.dataset[storedName];
+    }
+
+    function syncFavicon() {
+        if (paused || !document.head) return;
+        document.head.querySelectorAll('link[rel~="icon"]:not([data-saevyn-generated="favicon"])').forEach((nativeFavicon) => {
+            if (nativeFavicon.hasAttribute("data-codex-favicon-badge")) return;
+            storeNativeFavicon(nativeFavicon);
+            nativeFavicon.setAttribute("href", COMMUNITY_FAVICON);
+            nativeFavicon.setAttribute("type", "image/svg+xml");
+            nativeFavicon.setAttribute("sizes", "any");
+        });
+
+        let favicon = document.querySelector('link[data-saevyn-generated="favicon"]');
+        if (!favicon) {
+            favicon = document.createElement("link");
+            favicon.rel = "icon";
+            favicon.type = "image/svg+xml";
+            favicon.sizes = "any";
+            favicon.dataset.saevynGenerated = "favicon";
+        }
+        if (!favicon.hasAttribute("data-codex-favicon-badge") && favicon.getAttribute("href") !== COMMUNITY_FAVICON) {
+            favicon.href = COMMUNITY_FAVICON;
+        }
+        if (document.head.lastElementChild !== favicon) document.head.append(favicon);
+    }
+
+    function mutationsTouchFavicon(records) {
+        return records.some(record => {
+            if (record.target === document.head) return true;
+            return [...record.addedNodes, ...record.removedNodes].some(node =>
+                node instanceof Element && (
+                    node.matches('link[rel~="icon"]') ||
+                    Boolean(node.querySelector?.('link[rel~="icon"]'))
+                )
+            );
+        });
+    }
+
+    function restoreFavicon() {
+        document.head?.querySelectorAll('link[data-saevyn-favicon-stored="true"]').forEach((nativeFavicon) => {
+            restoreNativeFaviconAttribute(nativeFavicon, "href", "saevynOriginalFaviconHref");
+            restoreNativeFaviconAttribute(nativeFavicon, "type", "saevynOriginalFaviconType");
+            restoreNativeFaviconAttribute(nativeFavicon, "sizes", "saevynOriginalFaviconSizes");
+            delete nativeFavicon.dataset.saevynFaviconStored;
+        });
+        document.querySelector('link[data-saevyn-generated="favicon"]')?.remove();
+    }
 
     function updateSidebarCurrentStyle() {
         const styleId = "saevyn-sidebar-current-style";
